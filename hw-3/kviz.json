@@ -1,0 +1,33 @@
+
+  {
+     question: "Kako se zove najveca tehnoloska kompanija u Juznoj Koreji?",
+     choice1: "Samsung",
+     choice2: "Nokia",
+     choice3: "LG",
+     choice4: "Huawei",
+     answer: 1,
+  },
+  {
+     question: "Koliko udisaja dnevno uradi ljudsko telo?",
+     choice1: "5000",
+     choice2: "10 000",
+     choice3: "20 000",
+     choice4: "50 000",
+     answer: 3,
+  },
+  {
+     question: "Drugi svetski rat je poceo napadom Nemacke na?",
+     choice1: "SSSR",
+     choice2: "Italiju",
+     choice3: "Poljsku",
+     choice4: "Japan",
+     answer: 3,
+  },
+  {
+     question: "Koje godine je Kragujevac postao prestonica Srbije?",
+     choice1: "1833",
+     choice2: "1884",
+     choice3: "1818",
+     choice4: "1836",
+     answer: 2,
+  }
