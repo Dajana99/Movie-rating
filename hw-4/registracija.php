@@ -34,7 +34,7 @@
             </div>
             <h6 class="text-center mb-4">Vec imate nalog? Prijavite se <strong><a href="login.php">ovde</a></strong>.
             </h6>
-            <input type="hidden" name='login' value=1>
+            <input type="hidden" name='register' value=1>
             <button type="submit" class="btn btn-primary w-100">Registruj se</button>
         </form>
     </div>
