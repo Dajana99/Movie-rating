@@ -27,6 +27,52 @@
             </form>
         </div>
     </nav>
+    <div class="container">
+        <form action="index.php" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label>Naslov filma</label>
+                <input name="naslov" type="text" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>Opis</label>
+                <textarea class="form-control" name="opis" id="" cols="30" rows="10"></textarea>
+            </div>
+            <div class="form-group">
+                <label>Zanr / zanrovi (zanrove odvojiti sa <strong>,</strong> )</label>
+                <input type="text" name="zanr" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>Scenarista</label>
+                <input name="scenarista" type="text" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>Reziser</label>
+                <input name="reziser" type="text" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>Producentska Kuca</label>
+                <input name="producentska_kuca" type="text" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>Lista glumaca (glumce odvojiti sa <strong>,</strong> )</label>
+                <input name="glumci" type="text" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>Godina izdanja</label>
+                <input type="number" name = "godina_izdanja" class="form-control">
+            </div>
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" name = "poster">
+                <label class="custom-file-label">Odaberite fajl</label>
+            </div>
+            <div class="form-group">
+                <label>Trajanje</label>
+                <input type="number" name = "trajanje" class="form-control">
+            </div>
+            <input type = "hidden" name = 'upload' value = "1">
+            <button type="submit" class="btn btn-primary">Otpremi</button>
+        </form>
+    </div>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
         integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"

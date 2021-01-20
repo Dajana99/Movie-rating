@@ -59,6 +59,30 @@
         else{
             echo 'Greska ' . $database->error;
         }
-
     }
+
+    if(isset($_POST['upload'])){
+        $title = $_POST['naslov'];
+        $description = $_POST['opis'];
+        $genres = $_POST['zanr'];
+        $sw = $_POST['scenarista'];
+        $dir = $_POST['reziser'];
+        $ph = $_POST['producentska_kuca'];
+        $actors = $_POST['glumci'];
+        $duration = $_POST['trajanje'];
+        $release = $_POST['godina_izdanja'];
+        $poster = addslashes(file_get_contents($_FILES['poster']['tmp_name']));
+
+        $sql = "INSERT INTO filmovi(naslov,zanrovi,scenarista,reziser,producentska_kuca,glumci,godina_izdanja,poster,trajanje)
+                VALUES('$title','$genres','$sw','$dir','$ph','$actors',$release,'$poster',$duration)
+                ";
+        if($r = $database->query($sql) === TRUE){
+            header('location: admin.php');
+        }
+        else{
+            echo 'Greska ' .$database->error;
+        }
+    }
+
+
 ?>
