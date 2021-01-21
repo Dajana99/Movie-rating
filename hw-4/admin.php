@@ -78,7 +78,11 @@
             </td>
             <td>
                 <a class="btn btn-primary my-3" href="izmeni_film.php?id=<?php echo $movie['id'];?>">Izmeni film</a>
-                <a class="btn btn-primary my-3" onclick="obrisi_film(<?php echo $movie['id']?>)">Obrisi film</a>
+                <form action="index.php" method = "post">
+                    <button type = "submit" class="btn btn-primary my-3">Obrisi film</button>
+                    <input type = "hidden" name = "movieDelete">
+                    <input type = "hidden" name = "id" value = "<?php echo $movie['id']?>">
+                </form>
             </td>
             <?php endwhile;?>
             </tr>

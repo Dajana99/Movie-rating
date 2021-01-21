@@ -113,6 +113,15 @@
         }
 
     }
-
+    if(isset($_POST["movieDelete"])){
+        $id = $_POST['id'];
+        $sql = "DELETE FROM filmovi WHERE id = $id";
+        if($r = $database->query($sql) === TRUE){
+            header('location: admin.php');
+        }
+        else{
+            echo 'Greska ' .$database->error;
+        }
+    }
 
 ?>
