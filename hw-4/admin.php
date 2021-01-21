@@ -36,6 +36,7 @@
     <div class="container">
         <table class="my-3 table table-responsive">
             <th>Poster</th>
+            <th>Naslov</th>
             <th>Opis</th>
             <th>Zanrovi</th>
             <th>Scenarista</th>
@@ -48,7 +49,7 @@
             <?php while($movie = $movies->fetch_assoc()):?>
             <tr>
             <td>
-                <?php echo '<img src="data:image/jpeg;base64,'.base64_encode( $movie['poster'] ).'"/>';?>
+                <?php echo '<img class = "w-100" src="data:image/jpeg;base64,'.base64_encode( $movie['poster'] ).'"/>';?>
             </td>
             <td>
                 <h3><?php echo $movie['naslov'];?></h3>
