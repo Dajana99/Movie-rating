@@ -11,6 +11,7 @@
         $res = $database->query($get_user);
         if(mysqli_num_rows($res) > 0){
             $user = $res->fetch_assoc();
+            $uid = $user['id'];
             if($user['uloga'] == 'korisnik' && !isset($_SESSION['validated'])){
                 header('location: pocetna.php');
                 $_SESSION['validated'] = true;
@@ -118,6 +119,19 @@
         $sql = "DELETE FROM filmovi WHERE id = $id";
         if($r = $database->query($sql) === TRUE){
             header('location: admin.php');
+        }
+        else{
+            echo 'Greska ' .$database->error;
+        }
+    }
+    if(isset($_POST['rate'])){
+        $mid = $_POST['mid'];
+        $uid = $_POST['uid'];
+        $rate = $_POST['ocena'];
+        $comment = $_POST['komentar'];
+        $sql = "INSERT INTO ocene(film_id,korisnik_id,ocena,komentar) VALUES($mid,$uid,$rate,'$comment')";
+        if($database->query($sql) === TRUE){
+            header('location: detalji_filma.php?id='.$mid);
         }
         else{
             echo 'Greska ' .$database->error;
