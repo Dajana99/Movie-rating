@@ -12,6 +12,8 @@
         $id = $_GET['id'];
         $sql = "SELECT * FROM filmovi WHERE id = $id";
         $movie = $database->query($sql)->fetch_assoc();
+        $get_rate = "SELECT * FROM ocene WHERE korisnik_id = $uid";
+        $r = $database -> query($get_rate);
     ?>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">FilmoviPregled</a>
@@ -47,6 +49,7 @@
                 </div>
             </div>
             <div class="col-md-9">
+                <?php if (mysqli_num_rows($r) == 0):?>
                 <div class="row w-100">
                     <form class = "w-100" action="index.php" method = "POST">
                         <div class="form-group">
@@ -64,6 +67,30 @@
                         <button class = "btn btn-danger mx-auto d-block">Oceni</button>
                     </form>
                 </div>
+                <?php else:?>
+                    <?php 
+                        $rating_data = "SELECT * FROM ocene where korisnik_id = $uid";
+                        $res = $database->query($rating_data)->fetch_assoc();
+                    ?>
+                    <div class="row w-100">
+                    <form class = "w-100" action="index.php" method = "POST">
+                        <div class="form-group">
+                            <label>Ocena 1-10</label>
+                            <input name = "ocena" type="number" min = 1 max = 10 class="form-control" value = "<?php echo $res['ocena'];?>">
+                        </div>
+                        <div class="form-group">
+                            <label>Komentar</label>
+                            <textarea class = "form-control" name="komentar" id="" cols="30" rows="10"><?php echo $res['komentar']?></textarea>
+                        </div>
+                        <input type="hidden" name = "rateEdit">
+                        <input type="hidden" name = "mid" value = "<?php echo $id?>">
+                        <input type="hidden" name = "uid" value = "<?php echo $uid?>">
+
+                        <button class = "btn btn-danger mx-auto d-block">Izmeni</button>
+                    </form>
+                </div>
+
+                <?php endif;?>
             </div>
         
         </div>

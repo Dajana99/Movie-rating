@@ -137,5 +137,22 @@
             echo 'Greska ' .$database->error;
         }
     }
+    if(isset($_POST['rateEdit'])){
+        $mid = $_POST['mid'];
+        $uid = $_POST['uid'];
+        $rate = $_POST['ocena'];
+        $comment = $_POST['komentar'];
+        $sql = "UPDATE ocene 
+        SET ocena = $rate,
+            komentar = '$comment'
+            WHERE film_id = $mid AND korisnik_id = $uid
+            ";
+        if($database->query($sql) === TRUE){
+            header('location: detalji_filma.php?id='.$mid);
+        }
+        else{
+            echo 'Greska ' .$database->error;
+        }
+    }
 
 ?>
