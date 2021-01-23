@@ -14,7 +14,10 @@
         $movie = $database->query($sql)->fetch_assoc();
         $get_rate = "SELECT * FROM ocene WHERE korisnik_id = $uid";
         $r = $database -> query($get_rate);
-    ?>
+        $get_all_reviews = "SELECT korisnici.korisnicko_ime, ocene.ocena, ocene.komentar FROM ocene INNER JOIN korisnici on ocene.korisnik_id = korisnici.id WHERE film_id = $id";
+        
+        $reviews = $database->query($get_all_reviews);
+?>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">FilmoviPregled</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -38,63 +41,78 @@
             <div class="col-md-3">
                 <?php echo '<img class = "w-50 card-img-top w-100" src="data:image/jpeg;base64,'.base64_encode( $movie['poster'] ).'"/>';?>
                 <div class="container text-center mt-3">
-                <h4><?php echo $movie['naslov'];?></h4>
-                <p><?php echo $movie['opis'];?></p>
-                <p><strong>Zanrovi: </strong><?php echo $movie['zanrovi'];?></p>
-                <p><strong>Glumci: </strong><?php echo $movie['glumci'];?></p>
-                <p><strong>Scenarista: </strong><?php echo $movie['scenarista'];?></p>
-                <p><strong>Reziser: </strong><?php echo $movie['reziser'];?></p>
-                <p><strong>Godina izdanja: </strong><?php echo $movie['godina_izdanja'];?></p>
-                <p><strong>Trajanje: </strong> <?php echo $movie['trajanje'];?></p>
+                    <h4><?php echo $movie['naslov'];?></h4>
+                    <p><?php echo $movie['opis'];?></p>
+                    <p><strong>Zanrovi: </strong><?php echo $movie['zanrovi'];?></p>
+                    <p><strong>Glumci: </strong><?php echo $movie['glumci'];?></p>
+                    <p><strong>Scenarista: </strong><?php echo $movie['scenarista'];?></p>
+                    <p><strong>Reziser: </strong><?php echo $movie['reziser'];?></p>
+                    <p><strong>Godina izdanja: </strong><?php echo $movie['godina_izdanja'];?></p>
+                    <p><strong>Trajanje: </strong> <?php echo $movie['trajanje'];?></p>
                 </div>
             </div>
             <div class="col-md-9">
-                <?php if (mysqli_num_rows($r) == 0):?>
-                <div class="row w-100">
-                    <form class = "w-100" action="index.php" method = "POST">
-                        <div class="form-group">
-                            <label>Ocena 1-10</label>
-                            <input name = "ocena" type="number" min = 1 max = 10 class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label>Komentar</label>
-                            <textarea class = "form-control" name="komentar" id="" cols="30" rows="10"></textarea>
-                        </div>
-                        <input type="hidden" name = "rate">
-                        <input type="hidden" name = "mid" value = "<?php echo $id?>">
-                        <input type="hidden" name = "uid" value = "<?php echo $uid?>">
-
-                        <button class = "btn btn-danger mx-auto d-block">Oceni</button>
-                    </form>
+                <?php while($rate = $reviews->fetch_assoc()):?>
+                <div class="card">
+                    <div class="card-header">
+                        <span class = "float-left"><?php echo $rate['korisnicko_ime'];?></span>
+                        <span class ="float-right"><?php echo $rate['ocena']?> / 10</span>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text"><?php echo $rate['komentar'];?></p>
+                    </div>
                 </div>
-                <?php else:?>
+                <?php endwhile?>
+                <div class="section mt-5 container">
+                    <?php if (mysqli_num_rows($r) == 0):?>
+                    <div class="row w-100">
+                        <form class="w-100" action="index.php" method="POST">
+                            <div class="form-group">
+                                <label>Ocena 1-10</label>
+                                <input name="ocena" type="number" min=1 max=10 class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Komentar</label>
+                                <textarea class="form-control" name="komentar" id="" cols="30" rows="10"></textarea>
+                            </div>
+                            <input type="hidden" name="rate">
+                            <input type="hidden" name="mid" value="<?php echo $id?>">
+                            <input type="hidden" name="uid" value="<?php echo $uid?>">
+
+                            <button class="btn btn-danger mx-auto d-block">Oceni</button>
+                        </form>
+                    </div>
+                    <?php else:?>
                     <?php 
                         $rating_data = "SELECT * FROM ocene where korisnik_id = $uid";
                         $res = $database->query($rating_data)->fetch_assoc();
                     ?>
                     <div class="row w-100">
-                    <form class = "w-100" action="index.php" method = "POST">
-                        <div class="form-group">
-                            <label>Ocena 1-10</label>
-                            <input name = "ocena" type="number" min = 1 max = 10 class="form-control" value = "<?php echo $res['ocena'];?>">
-                        </div>
-                        <div class="form-group">
-                            <label>Komentar</label>
-                            <textarea class = "form-control" name="komentar" id="" cols="30" rows="10"><?php echo $res['komentar']?></textarea>
-                        </div>
-                        <input type="hidden" name = "rateEdit">
-                        <input type="hidden" name = "mid" value = "<?php echo $id?>">
-                        <input type="hidden" name = "uid" value = "<?php echo $uid?>">
+                        <form class="w-100" action="index.php" method="POST">
+                            <div class="form-group">
+                                <label>Ocena 1-10</label>
+                                <input name="ocena" type="number" min=1 max=10 class="form-control"
+                                    value="<?php echo $res['ocena'];?>">
+                            </div>
+                            <div class="form-group">
+                                <label>Komentar</label>
+                                <textarea class="form-control" name="komentar" id="" cols="30"
+                                    rows="10"><?php echo $res['komentar']?></textarea>
+                            </div>
+                            <input type="hidden" name="rateEdit">
+                            <input type="hidden" name="mid" value="<?php echo $id?>">
+                            <input type="hidden" name="uid" value="<?php echo $uid?>">
 
-                        <button class = "btn btn-danger mx-auto d-block">Izmeni</button>
-                    </form>
+                            <button class="btn btn-danger mx-auto d-block">Izmeni</button>
+                        </form>
+                    </div>
+
+                    <?php endif;?>
                 </div>
-
-                <?php endif;?>
             </div>
-        
+
         </div>
-    
+
     </div>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
         integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
