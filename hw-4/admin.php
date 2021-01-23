@@ -33,7 +33,7 @@
         </div>
     </nav>
 
-    <div class="container">
+    <div class="mx-5">
         <table class="my-3 table table-responsive">
             <th>Poster</th>
             <th>Naslov</th>
@@ -48,43 +48,43 @@
 
             <?php while($movie = $movies->fetch_assoc()):?>
             <tr>
-            <td>
-                <?php echo '<img class = "w-100" src="data:image/jpeg;base64,'.base64_encode( $movie['poster'] ).'"/>';?>
-            </td>
-            <td>
-                <h3><?php echo $movie['naslov'];?></h3>
-            </td>
+                <td>
+                    <?php echo '<img class = "w-100" src="data:image/jpeg;base64,'.base64_encode( $movie['poster'] ).'"/>';?>
+                </td>
+                <td>
+                    <h3><?php echo $movie['naslov'];?></h3>
+                </td>
 
-            <td>
-                <p><?php echo $movie['opis'];?></p>
-            </td>
-            <td>
-                <p><?php echo $movie['zanrovi'];?></p>
-            </td>
-            <td>
-                <p><?php echo $movie['scenarista'];?></p>
-            </td>
-            <td>
-                <p><?php echo $movie['reziser'];?></p>
-            </td>
-            <td>
-                <p><?php echo $movie['glumci'];?></p>
-            </td>
-            <td>
-                <p><?php echo $movie['godina_izdanja'];?></p>
-            </td>
-            <td>
-                <p><?php echo $movie['trajanje'];?></p>
-            </td>
-            <td>
-                <a class="btn btn-primary my-3" href="izmeni_film.php?id=<?php echo $movie['id'];?>">Izmeni film</a>
-                <form action="index.php" method = "post">
-                    <button type = "submit" class="btn btn-primary my-3">Obrisi film</button>
-                    <input type = "hidden" name = "movieDelete">
-                    <input type = "hidden" name = "id" value = "<?php echo $movie['id']?>">
-                </form>
-            </td>
-            <?php endwhile;?>
+                <td>
+                    <p><?php echo $movie['opis'];?></p>
+                </td>
+                <td>
+                    <p><?php echo $movie['zanrovi'];?></p>
+                </td>
+                <td>
+                    <p><?php echo $movie['scenarista'];?></p>
+                </td>
+                <td>
+                    <p><?php echo $movie['reziser'];?></p>
+                </td>
+                <td>
+                    <p><?php echo $movie['glumci'];?></p>
+                </td>
+                <td>
+                    <p><?php echo $movie['godina_izdanja'];?></p>
+                </td>
+                <td>
+                    <p><?php echo $movie['trajanje'];?></p>
+                </td>
+                <td>
+                    <a class="btn btn-primary my-3" href="izmeni_film.php?id=<?php echo $movie['id'];?>">Izmeni film</a>
+                    <form action="index.php" method="post">
+                        <button type="submit" class="btn btn-primary my-3">Obrisi film</button>
+                        <input type="hidden" name="movieDelete">
+                        <input type="hidden" name="id" value="<?php echo $movie['id']?>">
+                    </form>
+                </td>
+                <?php endwhile;?>
             </tr>
         </table>
 

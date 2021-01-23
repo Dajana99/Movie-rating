@@ -12,6 +12,7 @@
         if(mysqli_num_rows($res) > 0){
             $user = $res->fetch_assoc();
             $uid = $user['id'];
+            $_SESSION['uloga'] = $user['uloga'];
             if($user['uloga'] == 'korisnik' && !isset($_SESSION['validated'])){
                 header('location: pocetna.php');
                 $_SESSION['validated'] = true;

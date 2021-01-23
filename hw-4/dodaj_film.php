@@ -9,7 +9,7 @@
 <body>
     <?php include('index.php');?>
 
- <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">FilmoviPregled</a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -21,8 +21,10 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="pocetna.php">Pocetna</a>
                 </li>
+                <?php if($_SESSION['uloga'] == 'admin'):?>
                 <a class="nav-link" href="admin.php">Admin</a>
                 <a class="nav-link" href="dodaj_film.php">Dodaj Film </a>
+                <?php endif?>
             </ul>
             <form class="form-inline my-2 my-lg-0">
                 <a class="nav-link" href="index.php?logout=1"><?php echo $_SESSION['username']?> - Odjavi se</a>
@@ -61,17 +63,17 @@
             </div>
             <div class="form-group">
                 <label>Godina izdanja</label>
-                <input type="number" name = "godina_izdanja" class="form-control">
+                <input type="number" name="godina_izdanja" class="form-control">
             </div>
             <div class="custom-file">
-                <input type="file" class="custom-file-input" name = "poster">
+                <input type="file" class="custom-file-input" name="poster">
                 <label class="custom-file-label">Odaberite fajl</label>
             </div>
             <div class="form-group">
                 <label>Trajanje</label>
-                <input type="number" name = "trajanje" class="form-control">
+                <input type="number" name="trajanje" class="form-control">
             </div>
-            <input type = "hidden" name = 'upload' value = "1">
+            <input type="hidden" name='upload' value="1">
             <button type="submit" class="btn btn-primary">Otpremi</button>
         </form>
     </div>

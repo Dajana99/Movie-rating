@@ -14,7 +14,7 @@
         $movie = $database->query($sql); 
         $movie = $movie->fetch_assoc();
     ?>
-     <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">FilmoviPregled</a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -26,8 +26,10 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="pocetna.php">Pocetna</a>
                 </li>
+                <?php if($_SESSION['uloga'] == 'admin'):?>
                 <a class="nav-link" href="admin.php">Admin</a>
                 <a class="nav-link" href="dodaj_film.php">Dodaj Film </a>
+                <?php endif?>
             </ul>
             <form class="form-inline my-2 my-lg-0">
                 <a class="nav-link" href="index.php?logout=1"><?php echo $_SESSION['username']?> - Odjavi se</a>
@@ -36,45 +38,48 @@
     </nav>
 
     <div class="container">
-       <form class = "mt-3" action="index.php" method = "POST">
+        <form class="mt-3" action="index.php" method="POST">
             <div class="form-group">
                 <label>Naslov filma</label>
-                <input name="naslov" type="text" class="form-control" value = "<?php echo $movie['naslov']?>">
+                <input name="naslov" type="text" class="form-control" value="<?php echo $movie['naslov']?>">
             </div>
             <div class="form-group">
                 <label>Opis</label>
-                <textarea class="form-control" name="opis" id="" cols="30" rows="10"><?php echo $movie['opis']?></textarea>
+                <textarea class="form-control" name="opis" id="" cols="30"
+                    rows="10"><?php echo $movie['opis']?></textarea>
             </div>
             <div class="form-group">
                 <label>Zanr / zanrovi (zanrove odvojiti sa <strong>,</strong> )</label>
-                <input type="text" name="zanr" class="form-control" value = "<?php echo $movie['zanrovi']?>">
+                <input type="text" name="zanr" class="form-control" value="<?php echo $movie['zanrovi']?>">
             </div>
             <div class="form-group">
                 <label>Scenarista</label>
-                <input name="scenarista" type="text" class="form-control" value = "<?php echo $movie['scenarista']?>">
+                <input name="scenarista" type="text" class="form-control" value="<?php echo $movie['scenarista']?>">
             </div>
             <div class="form-group">
                 <label>Reziser</label>
-                <input name="reziser" type="text" class="form-control" value = "<?php echo $movie['reziser']?>">
+                <input name="reziser" type="text" class="form-control" value="<?php echo $movie['reziser']?>">
             </div>
             <div class="form-group">
                 <label>Producentska Kuca</label>
-                <input name="producentska_kuca" type="text" class="form-control" value = "<?php echo $movie['producentska_kuca']?>">
+                <input name="producentska_kuca" type="text" class="form-control"
+                    value="<?php echo $movie['producentska_kuca']?>">
             </div>
             <div class="form-group">
                 <label>Lista glumaca (glumce odvojiti sa <strong>,</strong> )</label>
-                <input name="glumci" type="text" class="form-control" value = "<?php echo $movie['glumci']?>">
+                <input name="glumci" type="text" class="form-control" value="<?php echo $movie['glumci']?>">
             </div>
             <div class="form-group">
                 <label>Godina izdanja</label>
-                <input type="number" name = "godina_izdanja" class="form-control" value = "<?php echo $movie['godina_izdanja']?>">
+                <input type="number" name="godina_izdanja" class="form-control"
+                    value="<?php echo $movie['godina_izdanja']?>">
             </div>
             <div class="form-group">
                 <label>Trajanje</label>
-                <input type="number" name = "trajanje" class="form-control" value = "<?php echo $movie['trajanje']?>">
+                <input type="number" name="trajanje" class="form-control" value="<?php echo $movie['trajanje']?>">
             </div>
-            <input type = "hidden" name = 'movieEdit' value = "1">
-            <input type = "hidden" name = "id" value = "<?php echo $id;?>">
+            <input type="hidden" name='movieEdit' value="1">
+            <input type="hidden" name="id" value="<?php echo $id;?>">
             <button type="submit" class="btn btn-primary">Izmeni</button>
         </form>
 

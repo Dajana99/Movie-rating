@@ -27,9 +27,16 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="">Pocetna <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="pocetna.php">Pocetna <span class="sr-only">(current)</span></a>
                 </li>
+                <?php if($_SESSION['uloga'] == 'admin'):?>
+                <a class="nav-link" href="admin.php">Admin</a>
+                <a class="nav-link" href="dodaj_film.php">Dodaj Film </a>
+                <?php endif?>
             </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <a class="nav-link" href="index.php?logout=1"><?php echo $_SESSION['username']?> - Odjavi se</a>
+            </form>
             <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
@@ -55,8 +62,8 @@
                 <?php while($rate = $reviews->fetch_assoc()):?>
                 <div class="card">
                     <div class="card-header">
-                        <span class = "float-left"><?php echo $rate['korisnicko_ime'];?></span>
-                        <span class ="float-right"><?php echo $rate['ocena']?> / 10</span>
+                        <span class="float-left"><?php echo $rate['korisnicko_ime'];?></span>
+                        <span class="float-right"><?php echo $rate['ocena']?> / 10</span>
                     </div>
                     <div class="card-body">
                         <p class="card-text"><?php echo $rate['komentar'];?></p>
