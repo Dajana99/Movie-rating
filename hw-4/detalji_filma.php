@@ -13,6 +13,7 @@
         $sql = "SELECT * FROM filmovi WHERE id = $id";
         $movie = $database->query($sql)->fetch_assoc();
         $get_rate = "SELECT * FROM ocene WHERE korisnik_id = $uid AND film_id = $id";
+        $avg_rate = $database -> query("SELECT AVG(ocena) as rating FROM ocene where film_id = $id")->fetch_assoc();
         $r = $database -> query($get_rate);
         $get_all_reviews = "SELECT korisnici.korisnicko_ime, ocene.ocena, ocene.komentar FROM ocene INNER JOIN korisnici on ocene.korisnik_id = korisnici.id WHERE film_id = $id";
         $reviews = $database->query($get_all_reviews);
@@ -58,6 +59,9 @@
                 </div>
             </div>
             <div class="col-md-9">
+                    <h3>Ocene korisnika</h3>
+                    <h5><?php echo mysqli_num_rows($reviews)?> ocena/e</h5>
+                    <h5>Prosecna ocena: <?php echo round($avg_rate['rating'],1);?></h5><br>
                 <?php while($rate = $reviews->fetch_assoc()):?>
                 <div class="card">
                     <div class="card-header">
