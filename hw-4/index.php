@@ -35,7 +35,8 @@
 
         $sql = "SELECT * FROM korisnici WHERE (korisnicko_ime = '$uname' OR email = '$uname') AND lozinka = '$password'";
         if(mysqli_num_rows($database->query($sql))>0){
-            $_SESSION['username'] = $uname;
+            $user = $database->query($sql)->fetch_assoc();
+            $_SESSION['username'] = $user['korisnicko_ime'];
             header('location:pocetna.php');
         }
         else{

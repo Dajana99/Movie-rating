@@ -12,10 +12,9 @@
         $id = $_GET['id'];
         $sql = "SELECT * FROM filmovi WHERE id = $id";
         $movie = $database->query($sql)->fetch_assoc();
-        $get_rate = "SELECT * FROM ocene WHERE korisnik_id = $uid";
+        $get_rate = "SELECT * FROM ocene WHERE korisnik_id = $uid AND film_id = $id";
         $r = $database -> query($get_rate);
         $get_all_reviews = "SELECT korisnici.korisnicko_ime, ocene.ocena, ocene.komentar FROM ocene INNER JOIN korisnici on ocene.korisnik_id = korisnici.id WHERE film_id = $id";
-        
         $reviews = $database->query($get_all_reviews);
 ?>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -37,8 +36,8 @@
             <form class="form-inline my-2 my-lg-0">
                 <a class="nav-link" href="index.php?logout=1"><?php echo $_SESSION['username']?> - Odjavi se</a>
             </form>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <form class="form-inline my-2 my-lg-0" method = "get" action = "pretraga.php">
+                <input class="form-control mr-sm-2" type="text" name = "search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>
         </div>
@@ -68,7 +67,7 @@
                     <div class="card-body">
                         <p class="card-text"><?php echo $rate['komentar'];?></p>
                     </div>
-                </div>
+                </div><br>
                 <?php endwhile?>
                 <div class="section mt-5 container">
                     <?php if (mysqli_num_rows($r) == 0):?>
@@ -91,8 +90,7 @@
                     </div>
                     <?php else:?>
                     <?php 
-                        $rating_data = "SELECT * FROM ocene where korisnik_id = $uid";
-                        $res = $database->query($rating_data)->fetch_assoc();
+                        $res = $r->fetch_assoc();
                     ?>
                     <div class="row w-100">
                         <form class="w-100" action="index.php" method="POST">
