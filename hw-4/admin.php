@@ -9,6 +9,9 @@
 <body>
     <?php include('index.php')?>
     <?php
+        if($_SESSION['uloga'] != 'admin'){
+            header('location: pocetna.php');
+        }
         $sql = "SELECT * FROM filmovi";
         $movies = $database->query($sql); 
     ?>

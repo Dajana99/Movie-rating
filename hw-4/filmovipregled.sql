@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.0.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 16, 2021 at 05:12 PM
--- Server version: 10.4.17-MariaDB
--- PHP Version: 8.0.0
+-- Generation Time: Jan 16, 2021 at 09:41 PM
+-- Server version: 10.4.14-MariaDB
+-- PHP Version: 7.2.34
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -73,7 +73,8 @@ CREATE TABLE `korisnici` (
 
 INSERT INTO `korisnici` (`id`, `ime`, `prezime`, `email`, `korisnicko_ime`, `lozinka`, `uloga`) VALUES
 (1, 'Korisnik', '1', '1@korisnik.com', 'korisnik1', 'affc2dc1a3f9fb05392d3cb0a784ff61', 'korisnik'),
-(2, 'Admin', 'Admin', 'admin@mail.com', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'admin');
+(2, 'Admin', 'Admin', 'admin@mail.com', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'admin'),
+(3, 'Korisnik', '2', 'korisnik@korisnik.com', 'korisnik2', '1018c6339573355427c0ecd5b3a9574b', 'korisnik');
 
 -- --------------------------------------------------------
 
@@ -94,7 +95,12 @@ CREATE TABLE `ocene` (
 --
 
 INSERT INTO `ocene` (`id`, `film_id`, `korisnik_id`, `ocena`, `komentar`) VALUES
-(1, 2, 1, 8, 'Sjajan film, ali je predugacak za moj ukus');
+(1, 2, 1, 8, 'Sjajan film, ali je predugacak za moj ukus'),
+(4, 4, 1, 10, 'Najbolji superherojski film svih vremena'),
+(5, 3, 3, 7, 'Dobar je'),
+(6, 2, 3, 6, 'Nije toliko los, nije toliko dobar, ocekivao sam vise'),
+(7, 4, 3, 3, 'Ne toliko dobar da bih ga odgledao do kraja'),
+(8, 3, 1, 10, 'Dobar :)');
 
 -- --------------------------------------------------------
 
@@ -153,13 +159,13 @@ ALTER TABLE `filmovi`
 -- AUTO_INCREMENT for table `korisnici`
 --
 ALTER TABLE `korisnici`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `ocene`
 --
 ALTER TABLE `ocene`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `zanrovi`

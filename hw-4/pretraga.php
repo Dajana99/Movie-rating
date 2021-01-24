@@ -10,7 +10,7 @@
     <?php include("index.php")?>
     <?php 
         $text = strtolower($_GET['search']);
-        $sql = "SELECT * FROM filmovi WHERE LOWER(naslov) LIKE '%".$text."%'";
+        $sql = "SELECT * FROM filmovi WHERE LOWER(naslov) LIKE '%".$text."%' OR LOWER(zanrovi) LIKE '%".$text."%'";
         $moviesForGrid = $database->query($sql);
         $moviesForList = $database->query($sql);
 

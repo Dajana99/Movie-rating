@@ -8,7 +8,11 @@
 
 <body>
     <?php include('index.php');?>
-
+    <?php 
+    if($_SESSION['uloga'] != 'admin'){
+            header('location: pocetna.php');
+        }
+    ?>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">FilmoviPregled</a>
 
